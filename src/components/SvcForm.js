@@ -15,12 +15,12 @@ export default class SvcForm extends Component {
     console.log(files[0].name.split('.')[0])
     let reader = new FileReader()
     reader.onload = function(e) {
-    //   // console.log(e)
-    //   // let rows = reader.result.split('\n')
-    //   // rows.forEach(e => console.log(e) )
-    //   // console.log(rows[0])
-    //   // console.log(files.name)
-    // }
+      console.log(e)
+      let rows = reader.result.split('\n')
+      rows.forEach(e => console.log(e) )
+      console.log(rows[0])
+      console.log(files.name)
+    }
     reader.readAsText(files[0])
     // d3.csv(files[0],function(csv){
     //
