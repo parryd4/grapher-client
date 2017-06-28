@@ -7,8 +7,7 @@ export default class SvcForm extends Component {
 
   constructor() {
     super()
-    // trying to use a variable??
-    let pleaseWork
+
     this.state = {
 
     }
@@ -40,8 +39,6 @@ export default class SvcForm extends Component {
 
       // let headings = rows[0].split(';')
 
-      this.pleaseWork = allData
-      console.log(this.pleaseWork)
       // https://github.com/d3/d3-dsv
       let ssv = d3.dsvFormat(";")
       let data = ssv.parse(allData)
@@ -91,7 +88,7 @@ export default class SvcForm extends Component {
   render() {
     return (
       <div>
-        {this.state.filename ? <TableDisplay tableData={this.prepareData(this.pleaseWork)}/> : <p>Hi Mom</p>}
+        {this.state.data ? <TableDisplay tableData={this.state.data}/> : <p>Hi Mom</p>}
         {/*this.state.filename ? <TableDisplay tableData={"something passes through"}/> : <p>Hi Mom</p>*/}
         {this.state.data ? console.log(this.state.data.length) : console.log("no data loaded")}
         <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>

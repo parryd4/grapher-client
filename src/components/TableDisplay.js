@@ -10,14 +10,24 @@ export default class TableDisplay extends Component {
   componentDidMount() {
     // both these things work with "something passes through" and renderreturning this.state.filename
     console.log('mounted')
-    console.log(this.props.tableData)
+    // console.log(this.props.tableData)
+
+
+    let space = document.getElementById("headings")
+    let tbody = document.getElementById("dataGoesHere")
+    let data = this.props.tableData
+    data.columns.forEach(e => space.innerHTML += (`<th>${e}</th>`))
+
+    data.forEach(function(d){
+      let insertRows = data.columns.map(c => (`<td>${d[c]}</td>`) )
+      tbody.innerHTML += (`<tr> ${insertRows.join(" ")} </tr>`)
+    })
 
   }
   /*
-  let space = document.getElementsByClassName("test")[0]
+  let space = document.getElementsById("test")
   let tbody = document.getElementById("dataHolder")
 
-  // headings.forEach(e => space.innerHTML += (`<th>${e}</th>`))
   data.columns.forEach(e => space.innerHTML += (`<th>${e}</th>`))
 
   data.forEach(function(d){
@@ -30,7 +40,6 @@ export default class TableDisplay extends Component {
   render() {
     return (
       <div>
-      <p>{this.props.tableData}</p>
         <table>
           <tbody id="dataGoesHere">
             <tr id="headings">
