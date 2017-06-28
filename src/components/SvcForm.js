@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactFileReader from 'react-file-reader'
 import * as d3 from 'd3'
 import TableDisplay from './TableDisplay'
+import ScatterDisplay from './ScatterDisplay'
 
 export default class SvcForm extends Component {
 
@@ -35,8 +36,8 @@ export default class SvcForm extends Component {
         reader.onerror = reject
       })
       .then(this.prepareData)
-      .catch(function(err) {
-        console.log(err)
+      .catch(function(error) {
+        console.log(error)
       })
     }
 
@@ -51,11 +52,12 @@ export default class SvcForm extends Component {
       <div>
 
         {this.state.data ? console.log(this.state.data.length) : console.log("no data loaded")}
+        {this.state.data ? <ScatterDisplay data={this.state.data} /> : console.log("no data loaded")}
 
         <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
           <button className='btn'>{this.state.filename || 'Select A File To Upload'}</button>
         </ReactFileReader>
-
+        {/* this is where I suppose I'll use Routes instead of conditional*/}
         {this.state.data ? <TableDisplay tableData={this.state.data}/> : <p>Hi Mom & Dad</p>}
 
       </div>
