@@ -2,6 +2,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+
+}
+h6 {
   background-color: #114;
   color: #999;
 }

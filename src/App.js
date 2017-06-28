@@ -12,9 +12,9 @@ class App extends Component {
         <div className="App-header">
           <h2>Welcome to Grapher</h2>
         </div>
-        <p className="App-intro">
+        <h3 className="App-intro">
           Upload your CSV and build a graph!
-        </p>
+        </h3>
         < SvcForm />
       </div>
     );
