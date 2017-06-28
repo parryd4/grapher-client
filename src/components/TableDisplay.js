@@ -24,19 +24,7 @@ export default class TableDisplay extends Component {
     })
 
   }
-  /*
-  let space = document.getElementsById("test")
-  let tbody = document.getElementById("dataHolder")
 
-  data.columns.forEach(e => space.innerHTML += (`<th>${e}</th>`))
-
-  data.forEach(function(d){
-
-    let insertRows = data.columns.map(c => (`<td>${d[c]}</td>`) )
-    tbody.innerHTML += (`<tr> ${insertRows.join(" ")} </tr>`)
-  })
-
-  */
   render() {
     return (
       <div>
@@ -49,5 +37,4 @@ export default class TableDisplay extends Component {
       </div>
     )
   }
-
 }
