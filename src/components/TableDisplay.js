@@ -8,10 +8,6 @@ export default class TableDisplay extends Component {
   }
 
   componentDidMount() {
-    // both these things work with "something passes through" and renderreturning this.state.filename
-    console.log('mounted')
-    // console.log(this.props.tableData)
-
 
     let space = document.getElementById("headings")
     let tbody = document.getElementById("dataGoesHere")

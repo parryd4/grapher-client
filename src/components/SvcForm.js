@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Route, Link} from 'react-router-dom'
 import ReactFileReader from 'react-file-reader'
 import * as d3 from 'd3'
 import TableDisplay from './TableDisplay'
