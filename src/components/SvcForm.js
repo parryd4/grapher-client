@@ -24,10 +24,10 @@ export default class SvcForm extends Component {
   prepareData(data) {
     let ssv = d3.dsvFormat(";")
     let cleanData
-    console.log(typeof data)
+
     if (typeof data === 'string'){
       cleanData = ssv.parse(data)
-      console.log(typeof cleanData)
+
     } else {
       cleanData = data
     }
@@ -97,18 +97,19 @@ export default class SvcForm extends Component {
 
     return (
       <div>
-        {this.state.data ? console.log(Object.keys(this.state.data[0])) : null /* have to use Object.keys instead of data.columns because data is not coming directly from parsed csv */}
-        {this.state.data ? console.log(this.state.data.length) : console.log("no data loaded")}
-        {this.state.data ? <ScatterDisplay data={this.state.data} /> : console.log("no data loaded")}
+        {/* this.state.data ? console.log(Object.keys(this.state.data[0])) : null /* have to use Object.keys instead of data.columns because data is not coming directly from parsed csv */}
+        {/* this.state.data ? <ScatterDisplay data={this.state.data} /> : console.log("no data loaded") */}
 
-        <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
+
+        <span><ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
           <button className='btn'>{this.state.filename || 'Select A File To Upload'}</button>
         </ReactFileReader>
         <button onClick={this.saveData}>Submit Data Set</button>
-        <button onClick={this.fetchData}>Open the first dataset</button>
+        <button onClick={this.fetchData}>Open the first dataset</button></span>
         <p id="beware"> </p>
         {/* this is where I suppose I'll use Routes instead of conditional*/}
-        {this.state.data ? <TableDisplay tableData={this.state.data}/> : <p>Hi Mom & Dad</p>}
+        {/* this.state.data ? <TableDisplay tableData={this.state.data}/> : <p>Hi Mom & Dad</p> */}
+        {this.state.data ? <FilterForm data={this.state.data} /> : console.log("no data loaded")}
 
       </div>
     )
