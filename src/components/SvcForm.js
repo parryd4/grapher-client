@@ -21,7 +21,15 @@ export default class SvcForm extends Component {
 
   prepareData(data) {
     let ssv = d3.dsvFormat(";")
-    let cleanData = ssv.parse(data)
+    let cleanData
+    console.log(typeof data)
+    if (typeof data === 'string'){
+      cleanData = ssv.parse(data)
+      console.log(typeof cleanData)
+    } else {
+      cleanData = data
+    }
+
     this.setState({
       data: cleanData
     })
@@ -45,6 +53,7 @@ export default class SvcForm extends Component {
   }
 
   fetchData() {
+    // currently hard coded for first data set
     fetch(`http://localhost:3000/api/v1/data_sets/1`, {
       method: 'GET',
       headers: {
@@ -52,8 +61,9 @@ export default class SvcForm extends Component {
         'accept': 'application/json'
       }
     }).then(response => response.json())
-    // .then(res => document.getElementById('beware').innerHTML = JSON.parse(res) )
-    .then(r => console.log(r))
+      .then(this.prepareData)
+    // .then(r => console.log(r))
+
     .catch(console.log)
   }
 
