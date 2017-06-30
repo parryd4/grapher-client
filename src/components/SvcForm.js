@@ -15,6 +15,8 @@ export default class SvcForm extends Component {
     }
     this.handleFiles = this.handleFiles.bind(this)
     this.prepareData = this.prepareData.bind(this)
+    this.saveData = this.saveData.bind(this)
+    this.fetchData = this.fetchData.bind(this)
   }
 
   prepareData(data) {
@@ -23,6 +25,36 @@ export default class SvcForm extends Component {
     this.setState({
       data: cleanData
     })
+  }
+
+  saveData() {
+    let data = this.state.data || "test"
+    fetch(`http://localhost:3000/api/v1/data_sets`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
+      body: JSON.stringify({
+        data_set: {user_id: 1,
+          content: JSON.stringify(data)}
+      })
+    }).then(response => response.json())
+    .then(console.log)
+    .catch(console.log)
+  }
+
+  fetchData() {
+    fetch(`http://localhost:3000/api/v1/data_sets/1`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      }
+    }).then(response => response.json())
+    // .then(res => document.getElementById('beware').innerHTML = JSON.parse(res) )
+    .then(r => console.log(r))
+    .catch(console.log)
   }
 
   handleFiles(files) {
@@ -36,6 +68,7 @@ export default class SvcForm extends Component {
         reader.readAsText(files[0])
         reader.onerror = reject
       })
+    //  .then(res => console.log(typeof res))
       .then(this.prepareData)
       .catch(function(error) {
         console.log(error)
@@ -58,6 +91,9 @@ export default class SvcForm extends Component {
         <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
           <button className='btn'>{this.state.filename || 'Select A File To Upload'}</button>
         </ReactFileReader>
+        <button onClick={this.saveData}>Submit Data Set</button>
+        <button onClick={this.fetchData}>Open the first dataset</button>
+        <p id="beware"> </p>
         {/* this is where I suppose I'll use Routes instead of conditional*/}
         {this.state.data ? <TableDisplay tableData={this.state.data}/> : <p>Hi Mom & Dad</p>}
 
