@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {Route, Link} from 'react-router-dom'
 import ReactFileReader from 'react-file-reader'
 import * as d3 from 'd3'
+
+import FilterForm from './FilterForm'
 import TableDisplay from './TableDisplay'
 import ScatterDisplay from './ScatterDisplay'
 
@@ -94,7 +96,7 @@ export default class SvcForm extends Component {
   render() {
     return (
       <div>
-
+        {this.state.data ? console.log(Object.keys(this.state.data[0])) : null /* have to use Object.keys instead of data.columns because data is not coming directly from parsed csv */}
         {this.state.data ? console.log(this.state.data.length) : console.log("no data loaded")}
         {this.state.data ? <ScatterDisplay data={this.state.data} /> : console.log("no data loaded")}
 
