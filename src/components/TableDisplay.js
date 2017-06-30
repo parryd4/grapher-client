@@ -14,7 +14,7 @@ export default class TableDisplay extends Component {
     let data = this.props.tableData
     // debugger
     // data.columns.forEach(e => space.innerHTML += (`<th>${e}</th>`))
-    Object.keys(data[0]).forEach(e => space.innerHTML += (`<th>${e}</th>`))
+    Object.keys(data[0]).forEach(e => space.innerHTML += (`<th>${e}</th>`)) //this lets db data work, above only works for freshly parsed.
 
     data.forEach(function(d){
       // let insertRows = data.columns.map(c => (`<td>${d[c]}</td>`) )

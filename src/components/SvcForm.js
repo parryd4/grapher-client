@@ -94,6 +94,7 @@ export default class SvcForm extends Component {
   }
 
   render() {
+
     return (
       <div>
         {this.state.data ? console.log(Object.keys(this.state.data[0])) : null /* have to use Object.keys instead of data.columns because data is not coming directly from parsed csv */}
