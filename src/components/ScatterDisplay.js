@@ -66,6 +66,7 @@ export default class ScatterDisplay extends Component {
 
 
   render() {
+    // console.log(this.props.data)
     return (
       <div id="scatterPlot">
 

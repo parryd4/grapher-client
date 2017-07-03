@@ -13,7 +13,7 @@ export default class SvcForm extends Component {
     super()
 
     this.state = {
-
+      data: []
     }
     this.handleFiles = this.handleFiles.bind(this)
     this.prepareData = this.prepareData.bind(this)
@@ -38,25 +38,29 @@ export default class SvcForm extends Component {
   }
 
   saveData() {
-    let data = this.state.data || "test"
-    fetch(`http://localhost:3000/api/v1/data_sets`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'accept': 'application/json'
-      },
-      body: JSON.stringify({
-        data_set: {user_id: 1,
-          content: JSON.stringify(data)}
-      })
-    }).then(response => response.json())
-    .then(console.log)
-    .catch(console.log)
+    this.setState({
+      data: []
+    })
+
+    // let data = this.state.data || "test"
+    // fetch(`http://localhost:3000/api/v1/data_sets`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'content-type': 'application/json',
+    //     'accept': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     data_set: {user_id: 1,
+    //       content: JSON.stringify(data)}
+    //   })
+    // }).then(response => response.json())
+    // .then(console.log)
+    // .catch(console.log)
   }
 
-  fetchData() {
-    // currently hard coded for first data set
-    fetch(`http://localhost:3000/api/v1/data_sets/1`, {
+  fetchData(e) {
+
+    fetch(`http://localhost:3000/api/v1/data_sets/${e.target.value}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -105,7 +109,8 @@ export default class SvcForm extends Component {
           <button className='btn'>{this.state.filename || 'Select A File To Upload'}</button>
         </ReactFileReader>
         <button onClick={this.saveData}>Submit Data Set</button>
-        <button onClick={this.fetchData}>Open the first dataset</button></span>
+        <button onClick={this.fetchData} value={1}>Open the First dataset</button>
+        <button onClick={this.fetchData} value={2}>Open the Second dataset</button></span>
         <p id="beware"> </p>
         {/* this is where I suppose I'll use Routes instead of conditional*/}
         {/* this.state.data ? <TableDisplay tableData={this.state.data}/> : <p>Hi Mom & Dad</p> */}
