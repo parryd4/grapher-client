@@ -38,7 +38,7 @@ export default class FilterForm extends Component {
     return (
       <div>
         <div>
-          <TableDisplay data={this.state.data}/>
+        <TableDisplay data={this.state.data}/>
           <select name="x" onChange={this.handleChange} value={this.state.x}>
           <option value="">Select X</option>
           {Object.keys(this.state.data[0]).map(n => <option value={n}>{n}</option>)}
