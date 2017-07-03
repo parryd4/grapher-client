@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import SvcForm from './components/SvcForm'
+import DataContainer from './containers/DataContainer'
 
 class App extends Component {
 
@@ -15,7 +15,7 @@ class App extends Component {
         <h3 className="App-intro">
           Upload your CSV and build a graph!
         </h3>
-        < SvcForm />
+        < DataContainer />
       </div>
     );
   }

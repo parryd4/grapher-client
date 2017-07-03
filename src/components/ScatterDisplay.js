@@ -2,6 +2,29 @@ import React, { Component } from 'react'
 import * as d3 from 'd3'
 
 export default class ScatterDisplay extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      data: props.data,
+      x: props.x,
+      y: props.y
+    }
+  }
+
+
+  componentWillReceiveProps(nextProps) {
+    console.log("tabledisplay")
+    console.log(this.props)
+    console.log("and then")
+    console.log(nextProps)
+    this.setState({
+      data: nextProps.data,
+      x: nextProps.x,
+      y: nextProps.y
+    })
+  }
+
   componentDidMount() {
     d3.select("h3").text("different")
     let margin = 30
@@ -26,7 +49,7 @@ export default class ScatterDisplay extends Component {
 
 
      //  this adds columns to the table. Unintentional.
-       this.props.data.forEach(function(d) {
+       this.state.data.forEach(function(d) {
          d.carbo = +d.carbo
          d.fiber = +d.fiber
         //  d.displacement = +d.displacement
@@ -61,7 +84,7 @@ export default class ScatterDisplay extends Component {
            .attr("x",0 - (height / 2))
            .attr("dy", "1em")
            .style("text-anchor", "middle")
-           .text("Fiber");
+           .text(this.props.settings.y);
      }
 
 

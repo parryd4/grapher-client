@@ -22,6 +22,7 @@ class TableDisplay extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("tabledisplay")
     console.log(this.props)
     console.log("and then")
     console.log(nextProps)
