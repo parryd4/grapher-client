@@ -35,8 +35,8 @@ class TableDisplay extends Component {
     if (document.getElementById("dataGoesHere")){
       document.getElementById("dataGoesHere").innerHTML=""
     }
-    console.log(this.state.data.length)
-    if ( this.state.data.length !== 0 ) {
+    // console.log(this.state.data.length)
+    if ( this.state.data ) {
       let dataGoesHere = document.getElementById("dataGoesHere")
       dataGoesHere.innerHTML = '<tr id="headings"></tr>'
       let headings = document.getElementById("headings")

@@ -97,6 +97,9 @@ export default class DataContainer extends Component {
 
   }
 
+
+
+
   render() {
 
     return (
@@ -113,7 +116,7 @@ export default class DataContainer extends Component {
         <button onClick={this.fetchData} value={2}>Open the Second dataset</button>
         <p id="beware"> </p>
         {/* this is where I suppose I'll use Routes instead of conditional*/}
-        {/* this.state.data ? <TableDisplay tableData={this.state.data}/> : <p>Hi Mom & Dad</p> */}
+        { this.state.data ? <TableDisplay tableData={this.state.data}/> : <p>Hi Mom & Dad</p> }
         {this.state.data.length > 0 ? <FilterForm data={this.state.data} /> : console.log("no data loaded")}
 
       </div>

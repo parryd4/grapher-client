@@ -90,7 +90,7 @@ export default class ScatterDisplay extends Component {
 
   render() {
     document.getElementById('scatterPlot').innerHTML = ""
-    d3.select("h3").text("different")
+    // d3.select("h3").text("different")
     let margin = 30
     let width = 700
     let height = 500
