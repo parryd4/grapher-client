@@ -50,6 +50,7 @@ export default class FilterForm extends Component {
         </div>
         {this.state.y !== "" ? <ScatterDisplay data={this.state.data} x={this.state.x} y={this.state.y}/> : null}
         <p>I will filter things</p>
+        <div id="scatterPlot"></div>
       </div>
     )
   }
