@@ -7,6 +7,7 @@ import FilterForm from '../components/FilterForm'
 import TableDisplay from '../components/TableDisplay'
 import ScatterDisplay from '../components/ScatterDisplay'
 
+
 export default class DataContainer extends Component {
 
   constructor() {
@@ -104,8 +105,6 @@ export default class DataContainer extends Component {
 
     return (
       <div>
-        {/* this.state.data ? console.log(Object.keys(this.state.data[0])) : null /* have to use Object.keys instead of data.columns because data is not coming directly from parsed csv */}
-        {/* this.state.data ? <ScatterDisplay data={this.state.data} /> : console.log("no data loaded") */}
 
 
         <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
@@ -115,9 +114,9 @@ export default class DataContainer extends Component {
         <button onClick={this.fetchData} value={1}>Open the First dataset</button>
         <button onClick={this.fetchData} value={2}>Open the Second dataset</button>
         <p id="beware"> </p>
-        {/* this is where I suppose I'll use Routes instead of conditional*/}
+        {/* this is where I suppose I'll use Routes instead of conditional */}
+        {this.state.data.length > 0 ? <FilterForm data={this.state.data} /> : console.log("no data loaded") }
         { this.state.data ? <TableDisplay tableData={this.state.data}/> : <p>Hi Mom & Dad</p> }
-        {this.state.data.length > 0 ? <FilterForm data={this.state.data} /> : console.log("no data loaded")}
 
       </div>
     )

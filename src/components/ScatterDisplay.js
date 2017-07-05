@@ -98,11 +98,11 @@ export default class ScatterDisplay extends Component {
 
  //    // x is Carbo
     // var x = d3.scaleLinear().domain([0, 25]).range([margin, width - margin]);
-    var x = d3.scaleLinear().range([margin, width - margin]);
+    var x = d3.scaleLinear().range([margin, width - (2*margin)]);
  //    // y is Fiber
     // var y = d3.scaleLinear().domain([0, 15]).range([height - margin, margin]);
     var y = d3.scaleLinear().range([height - (3*margin), margin]);
-    var r = d3.scaleLinear().domain([0, 5]).range([0, 15]);
+    // var r = d3.scaleLinear().domain([0, 5]).range([0, 15]);
 
 
     var svg = d3.select("#scatterPlot")
@@ -131,15 +131,14 @@ let bob = [this.state.x, this.state.y]
          .enter().append("circle")
          .attr("cx", function(d){return x(d[bob[0]])})
          .attr("cy", function(d){return y(d[bob[1]])})
-         .attr("r", function(d){return r( Math.sqrt( Math.abs(d[bob[1]]*10/d[bob[0]])) )})
+         .attr("r", function(d){return 5/*r( Math.sqrt( Math.abs(d[bob[1]]*10/d[bob[0]])) )*/})
          .style("fill","red")
 
       svg.append("g")
           .attr("transform", "translate(0," + (height - 3*margin) + ")")
           .call(d3.axisBottom(x));
       svg.append("text")
-          .attr("transform",
-                "translate(" + (width/2) + " ," + (height-2*margin) + ")")
+          .attr("transform", "translate(" + (width/2) + " ," + (height-2*margin) + ")")
           .style("text-anchor", "middle")
           .text(this.state.x);
 

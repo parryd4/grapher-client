@@ -9,7 +9,8 @@ export default class FilterForm extends Component {
     this.state = {
       data: props.data,
       x: "",
-      y: ""
+      y: "",
+      tableShow: true
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -30,6 +31,7 @@ export default class FilterForm extends Component {
     })
   }
 
+
   render() {
     console.log("filterform")
     console.log(this.props)
@@ -38,7 +40,8 @@ export default class FilterForm extends Component {
     return (
       <div>
         <div>
-        <TableDisplay data={this.state.data}/>
+        <button onClick ={this.toggleTable}>Show/Hide Table</button>
+        {this.state.tableShow ? <TableDisplay data={this.state.data}/> : null }
           <select name="x" onChange={this.handleChange} value={this.state.x}>
           <option value="">Select X</option>
           {Object.keys(this.state.data[0]).map(n => <option value={n}>{n}</option>)}
