@@ -6,6 +6,7 @@ import ScatterDisplay from './ScatterDisplay'
 export default class FilterForm extends Component {
   constructor(props) {
     super(props)
+    // state
     this.state = {
       data: props.data,
       x: "",
