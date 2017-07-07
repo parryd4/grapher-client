@@ -1,4 +1,5 @@
-const baseUrl = 'http://localhost:3000/api/v1'
+const devUrl = 'http://localhost:3000/api/v1'
+const baseUrl = 'https://evening-reaches-63474.herokuapp.com/api/v1'
 
 export class AuthAdapter {
   static login(loginParams){
