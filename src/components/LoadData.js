@@ -1,20 +1,13 @@
 import React, { Component } from 'react'
-import {Route, Link} from 'react-router-dom'
 import ReactFileReader from 'react-file-reader'
 import * as d3 from 'd3'
 
-import FilterForm from './FilterForm'
-import TableDisplay from './TableDisplay'
-import ScatterDisplay from './ScatterDisplay'
 
-export default class SvcForm extends Component {
+export default class LoadData extends Component {
 
   constructor() {
     super()
 
-    this.state = {
-      data: []
-    }
     this.handleFiles = this.handleFiles.bind(this)
     this.prepareData = this.prepareData.bind(this)
     this.saveData = this.saveData.bind(this)
@@ -31,10 +24,8 @@ export default class SvcForm extends Component {
     } else {
       cleanData = data
     }
+    this.props.handleData(cleanData)
 
-    this.setState({
-      data: cleanData
-    })
   }
 
   saveData() {
@@ -74,7 +65,6 @@ export default class SvcForm extends Component {
   }
 
   handleFiles(files) {
-
     if (files[0]) {
       new Promise(function(resolve, reject) {
         let reader = new FileReader()
@@ -84,38 +74,34 @@ export default class SvcForm extends Component {
         reader.readAsText(files[0])
         reader.onerror = reject
       })
-    //  .then(res => console.log(typeof res))
       .then(this.prepareData)
       .catch(function(error) {
         console.log(error)
       })
     }
-
-    this.setState({
-      filename: files[0].name.split('.')[0]
-    })
-
   }
+
+
+
 
   render() {
 
     return (
-      <div>
-        {/* this.state.data ? console.log(Object.keys(this.state.data[0])) : null /* have to use Object.keys instead of data.columns because data is not coming directly from parsed csv */}
-        {/* this.state.data ? <ScatterDisplay data={this.state.data} /> : console.log("no data loaded") */}
-
-
-        <span><ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
-          <button className='btn'>{this.state.filename || 'Select A File To Upload'}</button>
-        </ReactFileReader>
-        <button onClick={this.saveData}>Submit Data Set</button>
-        <button onClick={this.fetchData} value={1}>Open the First dataset</button>
-        <button onClick={this.fetchData} value={2}>Open the Second dataset</button></span>
-        <p id="beware"> </p>
-        {/* this is where I suppose I'll use Routes instead of conditional*/}
-        {/* this.state.data ? <TableDisplay tableData={this.state.data}/> : <p>Hi Mom & Dad</p> */}
-        {this.state.data ? <FilterForm data={this.state.data} /> : console.log("no data loaded")}
-
+      <div className="container-fluid">
+      <div className="row">
+        <p>Get started by uploading your own data or choosing a file</p>
+        <div className="col">
+          <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
+          <button>Select A File To Upload</button>
+          </ReactFileReader>
+        </div>
+        <div className="col">
+          <button onClick={this.fetchData} value={1}>Open the First dataset</button>
+        </div>
+        <div className="col">
+          <button onClick={this.fetchData} value={2}>Open the Second dataset</button>
+        </div>
+      </div>
       </div>
     )
   }
