@@ -9,9 +9,9 @@ export default class SignInContainer extends Component {
 
   render() {
     return (
-      <div>
-        <div><LoginForm onSubmit={this.props.onSubmit}/></div>
-        <div><SignupForm onSubmit={this.props.onSubmit}/></div>
+      <div className="row">
+        <div className="col"><LoginForm onSubmit={this.props.onSubmit}/></div>
+        <div className="col"><SignupForm onSubmit={this.props.onSubmit}/></div>
       </div>
     )
   }

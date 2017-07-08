@@ -15,7 +15,7 @@ export default class BuildChart extends Component {
 
 
   componentDidMount() {
-    console.log("father can you hear me how i have let you down")
+    console.log("whatthe")
   }
 
 
@@ -30,7 +30,6 @@ export default class BuildChart extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <p>does this even exist?</p>
           <TableDisplay currentData={this.props.currentData} />
         </div>
       </div>

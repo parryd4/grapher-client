@@ -26,10 +26,9 @@ export default class DashboardContainer extends Component {
       <div className="container-fluid">
         <LoadData handleData={this.handleData}/>
         <div className="container-fluid"></div>
-        {this.state.currentData.length > 0 ? <Link to='/build'>Build a chart!</Link>: <br/> }
+        {/* routes can die in a grease fire. */}
 
-
-        <Route path='/build' render={()=> <BuildChart currentData={this.state.currentData}/> } />
+        {this.state.currentData.length > 0 ? <BuildChart currentData={this.state.currentData}/> : <br />}
       </div>
     )
   }
