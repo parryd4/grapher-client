@@ -21,7 +21,9 @@ export default class FilterForm extends Component {
     console.log("and then")
     console.log(nextProps)
     this.setState({
-      data: nextProps.data
+      data: nextProps.data,
+      x: "",
+      y: ""
     })
   }
 
