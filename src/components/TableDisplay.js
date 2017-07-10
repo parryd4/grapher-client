@@ -39,9 +39,9 @@ class TableDisplay extends Component {
       <div>
         <p>YO</p>
         <table>
-          <tbody id="dataGoesHere">
-            <tr id="headings">
-              { this.tableHeadings() }
+          <tbody id="dataGoesHere" >
+            <tr id="headings" dangerouslySetInnerHTML={_html: this.tableHeadings()}>
+
             </tr>
           </tbody>
         </table>
