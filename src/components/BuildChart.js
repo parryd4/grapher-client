@@ -30,7 +30,7 @@ export default class BuildChart extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <TableDisplay currentData={this.props.currentData} />
+          {this.props.currentData.length !== 0 ? <TableDisplay currentData={this.props.currentData} /> : <p>buildchart</p>}
         </div>
       </div>
     )
