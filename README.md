@@ -10,16 +10,18 @@ Features:
 A user can upload a CSV and read all data in a table.
 A user can view 2 columns of that data in a Scatter Plot
 
-Flow:
-index.html loads index.js loads App.js
-SvcForm currently loads file and posts/gets db, handles csv data,
-
 A user can upload a CSV, (optional: save it to database, grab it from database)
 
+Main Component holds state for being logged in
+DataContainer will hold state for Current Data, and existing sets.
+Two children: Side bar, Body.
+Side bar will have login/logout.
+  Below that it will have the upload button.
+  Below the upload button will be a list of existing data sets with links.
 
+Body will display:
+  Root: first visit, will display Sign Up, Log In, or text "Get Started and Upload a Data Set"
+  If has Current Data, will take user to Dashboard
 
-Farther Back:
-- use regex instead of different functions to handle different delimiters
-- form, wireframes,
-
-Stretch Features:
+  Dashboard will display an input, by default "Unnamed Data Set"
+    Table of the current data set, and div with options to pick which type of chart, which will render different options depending on the chart.

@@ -1,0 +1,35 @@
+.title {
+  position: absolute;
+  text-align: center;
+  color: white;
+  background-color: rgba(0,0,255,0.6);
+  width: 100%;
+  z-index: -1;
+}
+
+.dataDisplay {
+  overflow-x: scroll;
+  position: absolute;
+  left: 20%;
+  top: 12%;
+}
+
+.loadData {
+  position: fixed;
+  top: 15%;
+}
+
+.sideLog {
+  position: absolute;
+  top: 2%;
+}
+
+.welcome {
+  position: absolute;
+  left: 30%;
+  top: 15%;
+}
+
+label {
+  padding: 10px;
+}

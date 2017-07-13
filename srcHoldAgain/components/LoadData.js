@@ -15,17 +15,14 @@ export default class LoadData extends Component {
   }
 
   prepareData(data) {
-    console.log('raw')
-    console.log(data)
     let ssv = d3.dsvFormat(";")
     let cleanData
 
     if (typeof data === 'string'){
       cleanData = ssv.parse(data)
-      console.log('clean')
-      console.log(cleanData)
+
     } else {
-      cleanData = data.content
+      cleanData = data
     }
     this.props.handleData(cleanData)
 
@@ -62,8 +59,9 @@ export default class LoadData extends Component {
       }
     }).then(response => response.json())
       .then(this.prepareData)
-      // .then(console.log)
-      .catch(console.log)
+    // .then(r => console.log(r))
+
+    .catch(console.log)
   }
 
   handleFiles(files) {
@@ -80,7 +78,6 @@ export default class LoadData extends Component {
       .catch(function(error) {
         console.log(error)
       })
-      this.props.setFileName( files[0].name )
     }
   }
 
@@ -90,14 +87,21 @@ export default class LoadData extends Component {
   render() {
 
     return (
-      <div className="loadData">
-        <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
+      <div className="container-fluid">
+      <div className="row">
+        <p>Get started by uploading your own data or choosing a file</p>
+        <div className="col">
+          <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.csv'}>
           <button>Select A File To Upload</button>
-        </ReactFileReader>
-        <ul>
-        <li onClick={this.fetchData} value={1}>Open the First dataset</li>
-        <li onClick={this.fetchData} value={2}>Open the Second dataset</li>
-        </ul>
+          </ReactFileReader>
+        </div>
+        <div className="col">
+          <button onClick={this.fetchData} value={1}>Open the First dataset</button>
+        </div>
+        <div className="col">
+          <button onClick={this.fetchData} value={2}>Open the Second dataset</button>
+        </div>
+      </div>
       </div>
     )
   }
