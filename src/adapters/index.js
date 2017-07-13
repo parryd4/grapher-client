@@ -18,17 +18,27 @@ export class AuthAdapter {
 }
 
 export class DataAdapter {
-  static save(data){
+
+  static all() {
+    return fetch(`${baseUrl}/data_sets`, {
+      headers: headers()
+    }).then( res => res.json() )
+  }
+
+  static create(data) {
     // let data = this.state.data || "test"
-    fetch(`http://localhost:3000/api/v1/data_sets`, {
+    return fetch(`http://localhost:3000/api/v1/data_sets`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
         'accept': 'application/json'
       },
       body: JSON.stringify({
-        data_set: {user_id: 1,
-          content: JSON.stringify(data)}
+        data_set: {
+          user_id: data.user_id,
+          content: JSON.stringify(data.content),
+          file_name: data.fileName
+        }
       })
     }).then(response => response.json())
     .then(console.log)

@@ -1,55 +1,44 @@
 import React, { Component } from 'react'
 import ReactFileReader from 'react-file-reader'
 import * as d3 from 'd3'
-
+import { DataAdapter } from '../adapters'
 
 export default class LoadData extends Component {
 
   constructor() {
     super()
 
+    this.allDataSets = this.allDataSets.bind(this)
     this.handleFiles = this.handleFiles.bind(this)
     this.prepareData = this.prepareData.bind(this)
-    this.saveData = this.saveData.bind(this)
     this.fetchData = this.fetchData.bind(this)
+
   }
 
   prepareData(data) {
-    console.log('raw')
-    console.log(data)
-    let ssv = d3.dsvFormat(";")
-    let cleanData
 
-    if (typeof data === 'string'){
-      cleanData = ssv.parse(data)
-      console.log('clean')
+    (data.content ? console.log('object!G2G') : console.log('isastring') )
+    let ssv = d3.dsvFormat(";")
+    let cleanData = {}
+
+    if (!data.content){
+      cleanData = {
+        user_id: localStorage.id || 0,
+        content: ssv.parse(data),
+        fileName: this.state.fileName
+      }
+      console.log('in the if -clean')
       console.log(cleanData)
     } else {
-      cleanData = data.content
+      console.log('in the else. ')
+      console.log ( JSON.parse(data.content) )
+      data.content = JSON.parse(data.content)
+      // console.log ( data )
+      cleanData = data
+      console.log(cleanData)
     }
     this.props.handleData(cleanData)
 
-  }
-
-  saveData() {
-    this.setState({
-      data: []
-    })
-
-    // let data = this.state.data || "test"
-    // fetch(`http://localhost:3000/api/v1/data_sets`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'content-type': 'application/json',
-    //     'accept': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     data_set: {user_id: 1,
-    //       content: JSON.stringify(data)}
-    //   })
-    // }).then(response => response.json())
-    // .then(console.log)
-    // .catch(console.log)
   }
 
   fetchData(e) {
@@ -68,6 +57,9 @@ export default class LoadData extends Component {
 
   handleFiles(files) {
     if (files[0]) {
+      this.setState({
+        fileName: files[0].name
+      })
       new Promise(function(resolve, reject) {
         let reader = new FileReader()
         reader.onload = function(event) {
@@ -80,14 +72,23 @@ export default class LoadData extends Component {
       .catch(function(error) {
         console.log(error)
       })
-      this.props.setFileName( files[0].name )
+
+
     }
   }
 
-
+  allDataSets() {
+    DataAdapter.all()
+      .then(sets => this.setState({ dataSets: sets}))
+  }
 
 
   render() {
+    // <ul>
+    // <li onClick={this.fetchData} value={1}>Open the First dataset</li>
+    // <li onClick={this.fetchData} value={2}>Open the Second dataset</li>
+    // </ul>
+    this.allDataSets()
 
     return (
       <div className="loadData">
@@ -95,8 +96,7 @@ export default class LoadData extends Component {
           <button>Select A File To Upload</button>
         </ReactFileReader>
         <ul>
-        <li onClick={this.fetchData} value={1}>Open the First dataset</li>
-        <li onClick={this.fetchData} value={2}>Open the Second dataset</li>
+          {this.state ? this.state.dataSets.map( (dataSet) => <li value={dataSet.id} onClick={this.fetchData}>{dataSet.file_name}</li>) : <p>sadandempty</p> }
         </ul>
       </div>
     )

@@ -35,14 +35,14 @@ export default class ChartDisplay extends Component {
       .append("svg")
       .attr("width", width)
       .attr("height", height)
-    let xValues = this.state.currentData.map( data => +data[xCol])
-    let yValues = this.state.currentData.map( data => +data[yCol])
+    let xValues = this.state.currentData.content.map( data => +data[xCol])
+    let yValues = this.state.currentData.content.map( data => +data[yCol])
 
     let x = d3.scaleLinear().range([margin, width - (margin)]).domain(d3.extent(xValues))
     let y = d3.scaleLinear().range([height - margin, margin]).domain(d3.extent(yValues))
 
     svg.selectAll("circle")
-      .data(this.state.currentData)
+      .data(this.state.currentData.content)
       .enter().append("circle")
       .attr("cx", function(d){return x(+d[xCol])})
       .attr("cy", function(d){return y(+d[yCol])})
@@ -74,14 +74,14 @@ export default class ChartDisplay extends Component {
   render() {
     return (
       <div>
-        <p>Below you can set the axes of the chart with columns from your data.</p>
+        <p>Explore the options below to customize your chart!</p>
         <select name="x" onChange={this.handleChange} value={this.state.x}>
           <option value="">Select X</option>
-          {Object.keys(this.state.currentData[0]).map(n => <option key={n} value={n}>{n}</option>)}
+          {Object.keys(this.state.currentData.content[0]).map(n => <option key={n} value={n}>{n}</option>)}
         </select>
         <select name="y" onChange={this.handleChange} value={this.state.y}>
           <option value="">Select Y</option>
-          {Object.keys(this.state.currentData[0]).map(n => <option key={n} value={n}>{n}</option>)}
+          {Object.keys(this.state.currentData.content[0]).map(n => <option key={n} value={n}>{n}</option>)}
         </select>
         <div id="chartSpace">
           {this.state.x === "" || this.state.y === "" ? null : this.buildChart()}

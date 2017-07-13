@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import { DataAdapter } from '../adapters'
 
 import LoadData from '../components/LoadData'
@@ -9,14 +10,12 @@ export default class DashboardContainer extends Component {
   constructor() {
     super()
     this.state = {
-      currentData: [],
-      fileName: "#",
+      currentData: {},
       viewType: "Table"
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleData = this.handleData.bind(this)
     this.saveData = this.saveData.bind(this)
-    this.setFileName = this.setFileName.bind(this)
   }
 
   handleChange(e) {
@@ -25,9 +24,13 @@ export default class DashboardContainer extends Component {
         viewType: e.target.value
       })
     } else {
-      this.setState({
-        [e.target.name]: e.target.value
-      })
+      var currentData = {...this.state.currentData}
+      currentData.fileName = e.target.value
+      console.log(currentData)
+      this.setState({currentData})
+      // this.setState({
+      //   [e.target.name]: e.target.value
+      // })
     }
   }
 
@@ -37,34 +40,27 @@ export default class DashboardContainer extends Component {
     })
   }
 
-
-  saveData(data) {
-    console.log(localStorage.user)
-    console.log(data)
-    console.log(this.state.fileName)
+  saveData() {
+    // console.log(localStorage.user)
+    DataAdapter.create(this.state.currentData)
+    console.log(this.state.currentData)
+    // console.log(this.state.fileName)
   }
-
-
-  setFileName(name) {
-    this.setState({
-      fileName: name
-    })
-  }
-
-
 
   render() {
-    console.log(this.state.fileName)
-    // console.log(this.state.currentData.length)
+    console.log('state')
+    console.log(this.state)
     return (
       <div>
-        <LoadData handleData={this.handleData} setFileName={this.setFileName}/>
+        <LoadData handleData={this.handleData} />
 
         <div className="dataDisplay">
+        { this.state.currentData.content ?
+          <div>
           <p>By default, data is represented in a Table. Select how you would like your data displayed below. Click the button below to save your chart or data.</p>
 
-          { this.state.fileName === "#" ? null : <input type="text" name="fileName" value={this.state.fileName} onChange={this.handleChange} /> }
-
+          { this.state.currentData.user_id == localStorage.id ? <input type="text" name="fileName" value={this.state.currentData.fileName} onChange={this.handleChange} /> : <h2>{this.state.currentData.fileName}</h2> }
+          <br />
           <div className="chooseDataDisplay">
             <label>
               <input type="radio" value="Table" checked={this.state.viewType === "Table"} onChange={this.handleChange} />
@@ -76,9 +72,10 @@ export default class DashboardContainer extends Component {
             </label>
             <button onClick={this.saveData}>Submit Data Set</button>
           </div>
-          { this.state.currentData.length > 0 ? null : "You have no data loaded. Please upload your own or choose a set from the left."}
-          { this.state.currentData.length > 0 && this.state.viewType === "Table" ? <DataDisplay currentData={this.state.currentData}/> : null}
-          { this.state.currentData.length > 0 && this.state.viewType === "Scatter" ? <ChartDisplay currentData={this.state.currentData}/> : null}
+          <br />
+          { this.state.currentData.content && this.state.viewType === "Table" ? <DataDisplay currentData={this.state.currentData}/> : null}
+          { this.state.currentData.content && this.state.viewType === "Scatter" ? <ChartDisplay currentData={this.state.currentData}/> : null}
+          </div> : "You have no data loaded. Please upload your own or choose a set from the left."}
         </div>
       </div>
     )
