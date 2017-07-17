@@ -67,14 +67,24 @@ export default class DashboardContainer extends Component {
               Table
             </label>
             <label>
+            <input type="radio" value="Line" checked={this.state.viewType === "Line"} onChange={this.handleChange} />
+            Line Chart
+            </label>
+            <label>
               <input type="radio" value="Scatter" checked={this.state.viewType === "Scatter"} onChange={this.handleChange} />
               Scatter Plot
+            </label>
+            <label>
+              <input type="radio" value="Bar" checked={this.state.viewType === "Bar"} onChange={this.handleChange} />
+              Bar Graph
             </label>
             <button onClick={this.saveData}>Submit Data Set</button>
           </div>
           <br />
           { this.state.currentData.content && this.state.viewType === "Table" ? <DataDisplay currentData={this.state.currentData}/> : null}
           { this.state.currentData.content && this.state.viewType === "Scatter" ? <ChartDisplay currentData={this.state.currentData}/> : null}
+          { this.state.currentData.content && this.state.viewType === "Line" ? <p>Wouldn't that be nice?</p> : null}
+          { this.state.currentData.content && this.state.viewType === "Bar" ? <img src='http://cdn.ttgtmedia.com/rms/onlineImages/finapps_quadrant_2013_02.jpg' /> : null}
           </div> : "You have no data loaded. Please upload your own or choose a set from the left."}
         </div>
       </div>

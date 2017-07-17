@@ -58,7 +58,7 @@ export default class Main extends Component {
             {localStorage.id || this.state.auth.isLoggedIn ? <Link to={'/'}><button onClick={this.logOut}>Logout</button></Link> : <LoginForm onSubmit={this.logIn} />}
           </div>
 
-          <Route path='/' render={() => ( localStorage.id || this.state.auth.isLoggedIn ? <Redirect to='/dashboard' /> : <div className="welcome">login/signup/intro</div>)} />
+          <Route path='/' render={() => ( localStorage.id || this.state.auth.isLoggedIn ? <Redirect to='/dashboard' /> : <div className="welcome"> <p>" BestIntroductionImaginable />"</p></div>)} />
           <Route path='/dashboard' render={()=> ( <DashboardContainer /> )} />
         </div>
 

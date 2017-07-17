@@ -22,7 +22,7 @@ export default class ChartDisplay extends Component {
   }
 
   buildChart() {
-    console.log('called')
+    // console.log('called')
     // I want to use %s
     let margin = 50
     let width = 700

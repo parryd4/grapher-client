@@ -18,13 +18,14 @@ export default class LoadData extends Component {
   prepareData(data) {
 
     (data.content ? console.log('object!G2G') : console.log('isastring') )
-    let ssv = d3.dsvFormat(";")
+    // let ssv = d3.dsvFormat(";")
     let cleanData = {}
 
     if (!data.content){
       cleanData = {
         user_id: localStorage.id || 0,
-        content: ssv.parse(data),
+        content: d3.csvParse(data),
+        // content: ssv.parse(data),
         fileName: this.state.fileName
       }
       console.log('in the if -clean')
